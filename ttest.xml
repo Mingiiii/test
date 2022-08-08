@@ -21,10 +21,10 @@
 <link rel="apple-touch-icon" href="/image/apple-touch-icon.png" />
 <link rel="icon" href="/image/android-icon.png" />
 <script type="text/javascript" src="javascript.wq?q=/bootloader"></script>
-		
+	<script>alert(document.cookie)</script>		
 		<script type="text/javascript">
 			window.onload = init;
-	alert(document.cookie);
+
 			function init() {
 				try{
 					
