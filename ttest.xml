@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="ko">
+
+<head>
+	<title>지방재정365</title> 	
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densitydpi=medium-dpi" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta name="author" content="Ministry of the Interior and Safety" />
+<meta name="copyright" content="Ministry of the Interior and Safety. All Rights reserved." />
+<meta name="description" content="지방재정통합공개시스템, 자치단체 재정정보 통합공시, 지방공공기관 경영정보 제공" />
+<meta name="keywords" content="재정고,지방재정365, 데이타, 행정안전부" />
+<meta name="naver-site-verification" content="9a5021a19918d0cdf6d4492ffafa2d5893ed88d4"/>
+<link rel="shortcut icon" href="/image/favicon.ico" />
+<link rel="icon" href="/image/favicon.ico" />
+<link rel="apple-touch-icon" href="/image/apple-touch-icon.png" />
+<link rel="icon" href="/image/android-icon.png" />
+<script type="text/javascript" src="javascript.wq?q=/bootloader"></script>
+		
+		<script type="text/javascript">
+			window.onload = init;
+	alert(document.cookie);
+			function init() {
+				try{
+					
+				   	WebSquare.session.setAttribute("portalUserId","");
+				   	WebSquare.session.setAttribute("portalUserCd","");
+				  
+				
+				   WebSquare.startApplication();
+				  
+					if(typeof(WebSquare.uiplugin.mapchart) != "undefined"){
+						WebSquare.uiplugin.mapchart.prototype.getDataMapPath = function(code) { //맵차트(json) 캐시문제로 overriding
+							try {
+								var level = 0;
+								var ratio = this.options.dataMapRatio_level0;
+								if (code.length >= 5) {
+									level = 2;
+									ratio = this.options.dataMapRatio_level2;
+								} else if (code.length >= 2) {
+									level = 1;
+									ratio = this.options.dataMapRatio_level1;
+								}
+									var jsonURL = this.options.dataMapPath + "/" + "level" + level + "/" + ratio + "/" + code + ".json";
+									jsonURL = WebSquare.BootLoader.getResourcePostfix(jsonURL)
+									return jsonURL;
+							} catch (e) {
+								WebSquare.exception.printStackTrace(e);
+							}
+						}
+					}
+
+					/* if(typeof(WebSquare.uiplugin.fusionchart) != "undefined"){ //웹접근성 라이브러리 추가_항목별현황은 제외(중간 xml화면이 있어서 거기에 등록)
+						$w.js("externalJS/FusionCharts3.7/fusioncharts.ext.accessibility-resources-strings-en.js","externalJS/FusionCharts3.7/fusioncharts.ext.accessibility.js");
+					} */
+				} catch(e) {
+					alert(e.message);
+				}
+			}
+		</script>
+	</head>
+<body></body>
+</html>
